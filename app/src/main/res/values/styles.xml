@@ -9,4 +9,12 @@
         <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
+    <style name="FloatingActionButtonStyle">
+        <item name="android:layout_margin">@dimen/dp_16</item>
+        <item name="android:background">@drawable/floating_action_button</item>
+        <item name="android:tint">@android:color/white</item>
+        <item name="android:src">@drawable/ic_add</item>
+        <item name="android:stateListAnimator">@anim/elevation_floating_button</item>
+    </style>
+
 </resources>

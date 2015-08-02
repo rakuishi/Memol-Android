@@ -1,0 +1,19 @@
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <objectAnimator
+            android:propertyName="translationZ"
+            android:duration="@android:integer/config_shortAnimTime"
+            android:valueFrom="@dimen/floating_button_elevation"
+            android:valueTo="@dimen/floating_button_raised_elevation"
+            android:valueType="floatType"/>
+    </item>
+    <item>
+        <objectAnimator
+            android:propertyName="translationZ"
+            android:duration="@android:integer/config_shortAnimTime"
+            android:valueFrom="@dimen/floating_button_raised_elevation"
+            android:valueTo="@dimen/floating_button_elevation"
+            android:valueType="floatType"/>
+    </item>
+</selector>

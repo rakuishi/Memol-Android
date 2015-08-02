@@ -3,9 +3,13 @@
     <!-- Elevation
          http://www.google.com/design/spec/what-is-material/objects-in-3d-space.html -->
     <dimen name="no_elevation">0dp</dimen>
+    <dimen name="floating_button_elevation">6dp</dimen>
+    <dimen name="floating_button_raised_elevation">12dp</dimen>
 
     <!-- Keylines and spacing
          http://www.google.com/design/spec/layout/metrics-keylines.html -->
+    <!-- Defaults screen margin -->
+    <dimen name="dp_16">16dp</dimen>
     <!-- Toolbar height -->
     <dimen name="dp_56">56dp</dimen>
 
