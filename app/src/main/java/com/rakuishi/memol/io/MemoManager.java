@@ -52,4 +52,14 @@ public class MemoManager {
             }
         });
     }
+
+    public void delete(final long id) {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<Memo> realmResults = mRealm.where(Memo.class).equalTo("id", id).findAll();
+                realmResults.clear();
+            }
+        });
+    }
 }

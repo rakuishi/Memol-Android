@@ -1,6 +1,9 @@
 package com.rakuishi.memol.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import butterknife.OnItemLongClick;
 
 
 public class MemoActivity extends Activity {
@@ -60,5 +64,23 @@ public class MemoActivity extends Activity {
     @OnItemClick(R.id.memo_listview)
     void onItemClicked(int position) {
         startActivity(MemoEditActivity.create(this, mAdapter.getItem(position).getId()));
+    }
+
+    @OnItemLongClick(R.id.memo_listview)
+    boolean onItemLongClicked(int position) {
+        final Context context = this;
+        final long id = mAdapter.getItem(position).getId();
+        CharSequence[] items = {getString(R.string.delete)};
+        new AlertDialog.Builder(this)
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (i == 0) {
+                            MemoManager.with(context).delete(id);
+                        }
+                    }
+                })
+                .show();
+        return true;
     }
 }
