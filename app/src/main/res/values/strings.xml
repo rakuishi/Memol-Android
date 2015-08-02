@@ -3,5 +3,6 @@
     <string name="app_name">Memol</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_done">Done</string>
 
 </resources>

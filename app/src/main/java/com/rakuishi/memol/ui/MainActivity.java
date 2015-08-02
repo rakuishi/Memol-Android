@@ -8,13 +8,19 @@ import android.widget.Toolbar;
 
 import com.rakuishi.memol.R;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class MainActivity extends Activity {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         setActionBar((Toolbar) findViewById(R.id.toolbar));
         setTitle(R.string.app_name);
@@ -34,5 +40,10 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.main_floating_action_button)
+    void onFloatingActionButtonClicked() {
+        startActivity(MemoEditActivity.create(this));
     }
 }

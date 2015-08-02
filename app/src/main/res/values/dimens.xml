@@ -8,9 +8,15 @@
 
     <!-- Keylines and spacing
          http://www.google.com/design/spec/layout/metrics-keylines.html -->
+    <!-- Space between content areas -->
+    <dimen name="dp_8">8dp</dimen>
     <!-- Defaults screen margin -->
     <dimen name="dp_16">16dp</dimen>
     <!-- Toolbar height -->
     <dimen name="dp_56">56dp</dimen>
+
+    <!-- Typography
+     http://www.google.com/design/spec/style/typography.html -->
+    <item name="line_height" format="float" type="dimen">1.5</item>
 
 </resources>
