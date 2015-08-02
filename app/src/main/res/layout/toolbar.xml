@@ -1,0 +1,9 @@
+<Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:popupTheme="@style/android:ThemeOverlay.Material.Light"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_56"
+    android:minHeight="@dimen/dp_56"
+    android:background="@color/primary"
+    android:elevation="@dimen/no_elevation"/>

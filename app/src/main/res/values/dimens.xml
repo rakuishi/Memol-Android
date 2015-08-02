@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Elevation
+         http://www.google.com/design/spec/what-is-material/objects-in-3d-space.html -->
+    <dimen name="no_elevation">0dp</dimen>
+
+    <!-- Keylines and spacing
+         http://www.google.com/design/spec/layout/metrics-keylines.html -->
+    <!-- Toolbar height -->
+    <dimen name="dp_56">56dp</dimen>
+
+</resources>
