@@ -13,11 +13,13 @@ import com.rakuishi.memol.io.MemoManager;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 
 public class MemoActivity extends Activity {
 
     private static final String TAG = MemoActivity.class.getSimpleName();
+    private MemoAdapter mAdapter;
 
     @Bind(R.id.memo_listview) ListView mListView;
 
@@ -30,8 +32,8 @@ public class MemoActivity extends Activity {
         setActionBar((Toolbar) findViewById(R.id.toolbar));
         getActionBar().setTitle(R.string.app_name);
 
-        MemoAdapter adapter = new MemoAdapter(this, MemoManager.with(this).findAll(), true);
-        mListView.setAdapter(adapter);
+        mAdapter = new MemoAdapter(this, MemoManager.with(this).findAll(), true);
+        mListView.setAdapter(mAdapter);
     }
 
     @Override
@@ -53,5 +55,10 @@ public class MemoActivity extends Activity {
     @OnClick(R.id.memo_floating_action_button)
     void onFloatingActionButtonClicked() {
         startActivity(MemoEditActivity.create(this));
+    }
+
+    @OnItemClick(R.id.memo_listview)
+    void onItemClicked(int position) {
+        startActivity(MemoEditActivity.create(this, mAdapter.getItem(position).getId()));
     }
 }

@@ -11,9 +11,13 @@ import android.widget.EditText;
 import android.widget.Toolbar;
 
 import com.rakuishi.memol.R;
+import com.rakuishi.memol.io.Memo;
 import com.rakuishi.memol.io.MemoManager;
 import com.rakuishi.memol.util.AbstractTextWatcher;
+import com.rakuishi.memol.util.BundleUtils;
 import com.rakuishi.memol.util.MenuItemUtils;
+
+import static com.rakuishi.memol.Config.EXTRA_ID;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,11 +29,18 @@ public class MemoEditActivity extends Activity {
 
     private static final String TAG = MemoEditActivity.class.getSimpleName();
     private MenuItem mDoneMenuItem;
+    private Memo mMemo;
 
     @Bind(R.id.memo_edit_edittext) EditText mEditText;
 
     public static Intent create(Context context) {
         return new Intent(context, MemoEditActivity.class);
+    }
+
+    public static Intent create(Context context, long id) {
+        Intent intent = new Intent(context, MemoEditActivity.class);
+        intent.putExtra(EXTRA_ID, id);
+        return intent;
     }
 
     @Override
@@ -38,15 +49,14 @@ public class MemoEditActivity extends Activity {
         setContentView(R.layout.activity_memo_edit);
         ButterKnife.bind(this);
 
+        long id = BundleUtils.getLong(getIntent().getExtras(), EXTRA_ID);
+        mMemo = MemoManager.with(this).find(id);
+
         setActionBar((Toolbar) findViewById(R.id.toolbar));
+        getActionBar().setTitle(mMemo == null ? R.string.title_memo_create : R.string.title_memo_update);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mEditText.addTextChangedListener(new AbstractTextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                updateMenuItem();
-            }
-        });
+        updateView();
     }
 
     @Override
@@ -64,12 +74,29 @@ public class MemoEditActivity extends Activity {
                 finish();
                 break;
             case R.id.action_done:
-                MemoManager.with(this).insert(mEditText.getText().toString());
+                if (mMemo == null) {
+                    MemoManager.with(this).insert(mEditText.getText().toString());
+                } else {
+                    MemoManager.with(this).update(mMemo, mEditText.getText().toString());
+                }
                 finish();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateView() {
+        if (mMemo != null) {
+            mEditText.setText(mMemo.getContent());
+        }
+
+        mEditText.addTextChangedListener(new AbstractTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                updateMenuItem();
+            }
+        });
     }
 
     private void updateMenuItem() {
